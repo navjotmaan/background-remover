@@ -7,21 +7,37 @@ removeBtn.addEventListener("click", async () => {
   const file = imageInput.files[0];
 
   if (!file) {
+    alert("Please select an image first!");
     return;
   }
 
-  const formData = new FormData();
-  formData.append("file", file);
+  removeBtn.disabled = true;
+  removeBtn.textContent = "Processing...";
 
-  const response = await fetch("http://localhost:8000/remove-bg", {
-    method: "POST",
-    body: formData,
-  });
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
 
-  const blob = await response.blob();
-  const imageUrl = URL.createObjectURL(blob);
+    const response = await fetch("https://background-remover-07u5.onrender.com/remove-bg", {
+      method: "POST",
+      body: formData,
+    });
 
-  resultImage.src = imageUrl;
-  downloadLink.href = imageUrl;
-  downloadLink.style.display = "inline";
+    if (!response.ok) throw new Error("Failed to remove background");
+
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
+
+    resultImage.src = imageUrl;
+    downloadLink.href = imageUrl;
+    downloadLink.style.display = "inline";
+  } catch (error) {
+    alert("Error: " + error.message);
+  } finally {
+    removeBtn.disabled = false;
+    removeBtn.textContent = "Remove Background";
+  }
 });
+
+
+
