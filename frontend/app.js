@@ -18,7 +18,7 @@ removeBtn.addEventListener("click", async () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("https://background-remover-07u5.onrender.com/remove-bg", {
+    const response = await fetch("https://nvmaan-background-remover.hf.space/remove-bg", {
       method: "POST",
       body: formData,
     });
