@@ -2,6 +2,24 @@ const imageInput = document.getElementById("imageInput");
 const removeBtn = document.getElementById("removeBtn");
 const resultImage = document.getElementById("resultImage");
 const downloadLink = document.getElementById("downloadLink");
+const uploadContainer = document.querySelector(".uploadFile");
+const uploadText = document.getElementById("uploadText");
+
+imageInput.addEventListener('change', () => {
+  if (imageInput.files && imageInput.files[0]) {
+    uploadContainer.classList.add('has-file');
+
+    uploadText.textContent = imageInput.files[0].name;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      document.getElementById('resultImage').src = e.target.result;
+    };
+    reader.readAsDataURL(imageInput.files[0]);
+  } else {
+    uploadContainer.classList.remove('has-file');
+  }
+});
 
 removeBtn.addEventListener("click", async () => {
   const file = imageInput.files[0];
