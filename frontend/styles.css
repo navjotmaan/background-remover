@@ -6,6 +6,8 @@ body {
   max-width: 600px;
   margin: 40px auto;
   text-align: center;
+  background-color: #2b2a2a;
+  color: white;
 }
 
 input {
@@ -15,7 +17,7 @@ input {
 .uploadFile {
   cursor: pointer;
   padding: 50px;
-  border: 1px dashed black;
+  border: 1px dashed white;
   border-radius: 10px;
   margin: 0;
   display: flex;
@@ -31,7 +33,7 @@ input {
 }
 
 .uploadFile.has-file {
-  border: 2px solid #669bbc;
+  border: 2px solid #D97F30;
 }
 
 form {
@@ -40,14 +42,13 @@ form {
 
 button {
   margin-top: 30px;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: #669bbc;
+  background-color: #D97F30;
   color: white;
   font-weight: bold;
-  width: 100%;
 }
 
 #downloadLink {
@@ -56,12 +57,22 @@ button {
 }
 
 .result {
-  border: 1px solid black;
+  border: 1px solid white;
   height: 600px;
   border-radius: 10px;
 }
 
 img {
+  color: white;
+  background-color: white;
   max-width: 100%;
   max-height: 100%;
+}
+
+h1 {
+  color: #e31022;
+}
+
+p {
+  font-size: 18px;
 }
