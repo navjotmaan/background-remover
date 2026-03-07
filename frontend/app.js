@@ -5,6 +5,8 @@ const downloadLink = document.getElementById("downloadLink");
 const uploadContainer = document.querySelector(".uploadFile");
 const uploadText = document.getElementById("uploadText");
 
+let currentBlobUrl = null;
+
 imageInput.addEventListener('change', () => {
   if (imageInput.files && imageInput.files[0]) {
     uploadContainer.classList.add('has-file');
@@ -44,11 +46,21 @@ removeBtn.addEventListener("click", async () => {
     if (!response.ok) throw new Error("Failed to remove background");
 
     const blob = await response.blob();
-    const imageUrl = URL.createObjectURL(blob);
 
-    resultImage.src = imageUrl;
-    downloadLink.href = imageUrl;
+    if (currentBlobUrl) {
+      URL.revokeObjectURL(currentBlobUrl);
+    }
+
+    currentBlobUrl = URL.createObjectURL(blob);
+
+    resultImage.src = currentBlobUrl;
+    downloadLink.href = currentBlobUrl;
     downloadLink.style.display = "inline";
+
+    imageInput.value = "";
+    uploadText.textContent = "Choose an image"; 
+    uploadContainer.classList.remove('has-file');
+
   } catch (error) {
     alert("Error: " + error.message);
   } finally {
